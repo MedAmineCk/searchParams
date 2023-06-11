@@ -37,6 +37,17 @@ export default function Home() {
         setSearchParams(sp)
     }
 
+    function handleFilterChange(key, value) {
+        setSearchParams(prevParams => {
+            if (value === null) {
+                prevParams.delete(key)
+            } else {
+                prevParams.set(key, value)
+            }
+            return prevParams
+        })
+    }
+
 
     return (
         <>
@@ -51,10 +62,10 @@ export default function Home() {
                 <button onClick={() => genNewSearchParamString('age',null)}>clear</button>
             </nav>
             <nav>
-                <button onClick={() => genNewSearchParamString('city','paris')}>Paris</button>
-                <button onClick={() => genNewSearchParamString('city','london')}>London</button>
-                <button onClick={() => genNewSearchParamString('city','new york')}>New York</button>
-                <button onClick={() => genNewSearchParamString('city',null)}>clear</button>
+                <button onClick={() => handleFilterChange('city','paris')}>Paris</button>
+                <button onClick={() => handleFilterChange('city','london')}>London</button>
+                <button onClick={() => handleFilterChange('city','new york')}>New York</button>
+                <button onClick={() => handleFilterChange('city',null)}>clear</button>
             </nav>
             {
                 filteredData.length > 0 ?
